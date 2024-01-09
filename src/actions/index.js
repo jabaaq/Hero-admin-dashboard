@@ -44,4 +44,23 @@ export const heroCreated = (hero) => {
         type: 'CREATED_HERO',
         payload: hero
     }
-} 
+}
+
+export const filtersFetched = (filters) => {
+    return {
+        type: 'FETCHED_FILTERS',
+        payload: filters
+    }
+}
+
+export const filtersFetching = () => {
+    return {
+        type: 'FETCHING_FILTERS'
+    }
+}
+
+export const filtersFetchingError = () => {
+    return {
+        type: 'FILTERS_FETCHING_ERROR'
+    }
+}

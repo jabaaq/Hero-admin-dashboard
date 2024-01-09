@@ -24,7 +24,6 @@ const HeroesList = () => {
 
     const deleteFromDb = useCallback((id) => {
         request(`http://localhost:3001/heroes/${id}`, 'DELETE')
-            .then(data => console.log('hero is successfully deleted', data))
             .then(dispatch(heroDeleteFromDb(id)))
             .catch(error => console.log(error))
     }, [request])

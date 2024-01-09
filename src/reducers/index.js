@@ -1,7 +1,8 @@
 const initialState = {
     heroes: [],
     heroesLoadingStatus: 'idle',
-    filters: []
+    filters: [],
+    filtersLoadingStatus: 'idle'
 }
 
 const reducer = (state = initialState, action) => {
@@ -43,6 +44,23 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 heroes: newCreatedHeroList
             }
+        case 'FETCHING_FILTERS':
+            return {
+                ...state,
+                filtersLoadingStatus: "loading"
+            }
+        case 'FETCHED_FILTERS':
+            const fetchedFilters = [...state.filters, ...action.payload]
+            return {
+                ...state,
+                filters: action.payload
+            }
+        case 'FILTERS_FETCHING_ERROR':
+            return {
+                ...state,
+                filtersLoadingStatus: 'error'
+            }
+
         case 'DB_DELETED_HERO':
             const updatedHeroList = state.heroes.filter(item => item.id !== action.payload)
             return {
@@ -55,3 +73,11 @@ const reducer = (state = initialState, action) => {
 }
 
 export default reducer;
+
+// "filters": [
+//     "all",
+//     "fire",
+//     "water",
+//     "wind",
+//     "earth"
+//   ]

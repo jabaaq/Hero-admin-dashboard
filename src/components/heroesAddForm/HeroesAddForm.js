@@ -1,9 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
-import { addHero } from '../../actions';
-import { useDispatch } from 'react-redux';
+import { filtersFetched } from '../../actions';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHttp } from '../../hooks/http.hook';
 import { heroCreated } from '../../actions';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 // Дополнительно:
 // Элементы <option></option> желательно сформировать на базе
 // данных из фильтров
@@ -15,6 +16,7 @@ const HeroesAddForm = () => {
 
     const dispatch = useDispatch()
     const { request } = useHttp()
+    const { filters } = useSelector((state) => state)
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -32,7 +34,6 @@ const HeroesAddForm = () => {
         setDescription('')
         setElement('')
     }
-
     return (
         <form className="border p-4 shadow-lg rounded" onSubmit={(event) => {
             handleSubmit(event)
@@ -65,17 +66,17 @@ const HeroesAddForm = () => {
             </div>
 
             <div className="mb-3">
-                <label htmlFor="element" className="form-label">Выбрать элемент героя</label>
+                <label htmlFor="element" className="form-label">Выбрать элемен т героя</label>
                 <select
                     required
                     className="form-select"
                     id="element"
                     name="element" value={element} onChange={(e) => setElement(e.target.value)}>
                     <option >Я владею элементом...</option>
-                    <option value="fire">Огонь</option>
-                    <option value="water">Вода</option>
-                    <option value="wind">Ветер</option>
-                    <option value="earth">Земля</option>
+                    {filters.map((filter, i) => (
+                        <option key={i} value={filter.name}>{filter.label}</option>
+                    ))}
+
                 </select>
             </div>
 

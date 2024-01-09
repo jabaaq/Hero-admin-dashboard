@@ -1,4 +1,8 @@
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHttp } from "../../hooks/http.hook";
+import { filtersFetched } from "../../actions";
+import { filtersFetching, filtersFetchingError } from "../../actions";
 // Задача для этого компонента:
 // Фильтры должны формироваться на основании загруженных данных
 // Фильтры должны отображать только нужных героев при выборе
@@ -7,6 +11,18 @@
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
 const HeroesFilters = () => {
+    const { request } = useHttp()
+    const dispatch = useDispatch()
+    const { filters, filtersLoadingStatus } = useSelector((state) => state)
+
+    useEffect(() => {
+        request("http://localhost:3001/filters")
+            .then(dispatch(filtersFetching()))
+            .then(data => dispatch(filtersFetched(data)))
+            .catch(dispatch(filtersFetchingError()))
+
+    }, [])
+
     return (
         <div className="card shadow-lg mt-4">
             <div className="card-body">

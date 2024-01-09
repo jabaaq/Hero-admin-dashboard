@@ -1,60 +1,49 @@
 {
-    "heroes": [
-        {
-            "id": 1,
-            "name": "Первый герой",
-            "description": "Первый герой в рейтинге!",
-            "element": "fire"
-        },
-        {
-            "id": 2,
-            "name": "Неизвестный герой",
-            "description": "Скрывающийся в тени",
-            "element": "wind"
-        },
-        {
-            "id": 3,
-            "name": "Морской герой",
-            "description": "Как аквамен, но не из DC",
-            "element": "water"
-        }
-    ],
-    "filters": [
-        {
-            "0": "a",
-            "1": "l",
-            "2": "l",
-            "id": "3c15"
-        },
-        {
-            "0": "f",
-            "1": "i",
-            "2": "r",
-            "3": "e",
-            "id": "85d9"
-        },
-        {
-            "0": "w",
-            "1": "a",
-            "2": "t",
-            "3": "e",
-            "4": "r",
-            "id": "354f"
-        },
-        {
-            "0": "w",
-            "1": "i",
-            "2": "n",
-            "3": "d",
-            "id": "f276"
-        },
-        {
-            "0": "e",
-            "1": "a",
-            "2": "r",
-            "3": "t",
-            "4": "h",
-            "id": "f70d"
-        }
-    ]
+  "heroes": [
+    {
+      "id": 1,
+      "name": "Первый герой",
+      "description": "Первый герой в рейтинге!",
+      "element": "fire"
+    },
+    {
+      "id": 2,
+      "name": "Неизвестный герой",
+      "description": "Скрывающийся в тени",
+      "element": "wind"
+    },
+    {
+      "id": 3,
+      "name": "Морской герой",
+      "description": "Как аквамен, но не из DC",
+      "element": "water"
+    }
+  ],
+  "filters": [
+    {
+      "name": "all",
+      "label": "Все",
+      "className": "btn-outline-dark"
+    },
+    {
+      "name": "fire",
+      "label": "Огонь",
+      "className": "btn-danger"
+    },
+    {
+      "name": "water",
+      "label": "Вода",
+      "className": "btn-primary"
+    },
+    {
+      "name": "wind",
+      "label": "Ветер",
+      "className": "btn-success"
+    },
+    {
+      "name": "earth",
+      "label": "Земля",
+      "className": "btn-secondary"
+    }
+  ]
 }
