@@ -5,6 +5,7 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
+
     switch (action.type) {
         case 'HEROES_FETCHING':
             return {
@@ -36,12 +37,19 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 heroes: addedIntoHeroesList
             }
+        case 'CREATED_HERO':
+            const newCreatedHeroList = [...state.heroes, action.payload]
+            return {
+                ...state,
+                heroes: newCreatedHeroList
+            }
         case 'DB_DELETED_HERO':
             const updatedHeroList = state.heroes.filter(item => item.id !== action.payload)
             return {
                 ...state,
                 heroes: updatedHeroList
             }
+
         default: return state
     }
 }

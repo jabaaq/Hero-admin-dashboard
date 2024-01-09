@@ -37,4 +37,11 @@ export const addHero = (hero) => {
         type: "ADD_NEW_HERO",
         payload: hero
     }
+
 }
+export const heroCreated = (hero) => {
+    return {
+        type: 'CREATED_HERO',
+        payload: hero
+    }
+} 

@@ -1,33 +1,41 @@
 import { v4 as uuidv4 } from 'uuid';
 import { addHero } from '../../actions';
 import { useDispatch } from 'react-redux';
-// Задача для этого компонента:
-// Реализовать создание нового героя с введенными данными. Он должен попадать
-// в общее состояние и отображаться в списке + фильтроваться
-// Уникальный идентификатор персонажа можно сгенерировать через uiid
-// Персонаж создается и в файле json при помощи метода POST
-// Усложненная задача:
+import { useHttp } from '../../hooks/http.hook';
+import { heroCreated } from '../../actions';
+import { useState } from 'react';
 // Дополнительно:
 // Элементы <option></option> желательно сформировать на базе
 // данных из фильтров
 
 const HeroesAddForm = () => {
-    const dispatch = useDispatch()
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [element, setElement] = useState('')
 
-    const handelSubmit = (event) => {
+    const dispatch = useDispatch()
+    const { request } = useHttp()
+
+    const handleSubmit = (event) => {
         event.preventDefault()
         const addedHero = {
             "id": uuidv4(),
-            "name": event.target[0].value,
-            "description": event.target[1].value,
-            "element": event.target[2].value
+            "name": name,
+            "description": description,
+            "element": element
         }
-        dispatch(addHero(addedHero))
+        request('http://localhost:3001/heroes', 'POST', JSON.stringify(addedHero))
+            .then(dispatch(heroCreated(addedHero)))
+            .catch(error => console.log(error))
+
+        setName('')
+        setDescription('')
+        setElement('')
     }
 
     return (
         <form className="border p-4 shadow-lg rounded" onSubmit={(event) => {
-            handelSubmit(event)
+            handleSubmit(event)
             event.target.reset()
         }}>
             <div className="mb-3">
@@ -36,6 +44,8 @@ const HeroesAddForm = () => {
                     required
                     type="text"
                     name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="form-control"
                     id="name"
                     placeholder="Как меня зовут?" />
@@ -49,6 +59,8 @@ const HeroesAddForm = () => {
                     className="form-control"
                     id="text"
                     placeholder="Что я умею?"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     style={{ "height": '130px' }} />
             </div>
 
@@ -58,7 +70,7 @@ const HeroesAddForm = () => {
                     required
                     className="form-select"
                     id="element"
-                    name="element">
+                    name="element" value={element} onChange={(e) => setElement(e.target.value)}>
                     <option >Я владею элементом...</option>
                     <option value="fire">Огонь</option>
                     <option value="water">Вода</option>
