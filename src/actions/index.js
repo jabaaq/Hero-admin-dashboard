@@ -64,3 +64,10 @@ export const filtersFetchingError = () => {
         type: 'FILTERS_FETCHING_ERROR'
     }
 }
+
+export const filterHeroList = (filerBy) => {
+    return {
+        type: 'FILTER_HERO_LIST',
+        payload: filerBy
+    }
+}

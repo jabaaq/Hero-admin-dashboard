@@ -9,11 +9,12 @@ import Spinner from '../spinner/Spinner';
 
 
 const HeroesList = () => {
-    const { heroes, heroesLoadingStatus } = useSelector(state => state);
+    const { heroes, heroesLoadingStatus, filteredHeroesList, filterBy } = useSelector(state => state);
     const dispatch = useDispatch();
     const { request } = useHttp();
 
     useEffect(() => {
+        console.log(filterBy);
         dispatch(heroesFetching());
         request("http://localhost:3001/heroes")
             .then(data => dispatch(heroesFetched(data)))
@@ -39,15 +40,14 @@ const HeroesList = () => {
             return <h5 className="text-center mt-5">Героев пока нет</h5>
         }
 
-        return arr.map(({ id, ...props }, i) => {
+        return arr.map(({ id, ...props }) => {
             return <HeroesListItem key={id} {...props} onDelete={() => {
-                // dispatch(onDelete(i))
                 deleteFromDb(id)
             }} />
         })
     }
 
-    const elements = renderHeroesList(heroes);
+    const elements = renderHeroesList(filteredHeroesList);
     return (
         <ul>
             {elements}
