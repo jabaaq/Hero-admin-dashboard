@@ -26,7 +26,10 @@ const HeroesAddForm = () => {
     }
 
     return (
-        <form className="border p-4 shadow-lg rounded" onSubmit={handelSubmit}>
+        <form className="border p-4 shadow-lg rounded" onSubmit={(event) => {
+            handelSubmit(event)
+            event.target.reset()
+        }}>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label fs-4">Имя нового героя</label>
                 <input
