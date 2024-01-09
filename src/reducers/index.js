@@ -29,6 +29,19 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 heroes: newHeroList
             }
+        case 'ADD_NEW_HERO':
+            const addedIntoHeroesList = [...state.heroes]
+            addedIntoHeroesList.push(action.payload)
+            return {
+                ...state,
+                heroes: addedIntoHeroesList
+            }
+        case 'DB_DELETED_HERO':
+            const updatedHeroList = state.heroes.filter(item => item.id !== action.payload)
+            return {
+                ...state,
+                heroes: updatedHeroList
+            }
         default: return state
     }
 }

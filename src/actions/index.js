@@ -23,3 +23,18 @@ export const onDelete = (index) => {
         payload: index
     }
 }
+
+export const heroDeleteFromDb = (id) => {
+    return {
+        type: 'DB_DELETED_HERO',
+        payload: id
+    }
+}
+
+
+export const addHero = (hero) => {
+    return {
+        type: "ADD_NEW_HERO",
+        payload: hero
+    }
+}
