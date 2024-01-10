@@ -5,9 +5,6 @@ import { useHttp } from '../../hooks/http.hook';
 import { heroCreated } from '../../actions';
 import { useEffect, useState } from 'react';
 
-// Дополнительно:
-// Элементы <option></option> желательно сформировать на базе
-// данных из фильтров
 
 const HeroesAddForm = () => {
     const [name, setName] = useState('')
@@ -16,7 +13,7 @@ const HeroesAddForm = () => {
 
     const dispatch = useDispatch()
     const { request } = useHttp()
-    const { filters } = useSelector((state) => state)
+    const { filters } = useSelector((state) => state.filters)
 
     const handleSubmit = (event) => {
         event.preventDefault()
