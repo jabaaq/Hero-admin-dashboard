@@ -19,6 +19,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 heroes: action.payload,
+                //initial filtration
+                filteredHeroesList: state.filterBy === 'all' ? action.payload : action.payload.filter(item => item.element === state.filterBy),
                 heroesLoadingStatus: 'idle'
             }
         case 'HEROES_FETCHING_ERROR':
@@ -83,10 +85,3 @@ const reducer = (state = initialState, action) => {
 
 export default reducer;
 
-// "filters": [
-//     "all",
-//     "fire",
-//     "water",
-//     "wind",
-//     "earth"
-//   ]
