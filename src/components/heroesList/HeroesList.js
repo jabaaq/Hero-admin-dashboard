@@ -9,12 +9,19 @@ import Spinner from '../spinner/Spinner';
 
 
 const HeroesList = () => {
-    const { heroes, heroesLoadingStatus, filteredHeroesList, filterBy } = useSelector(state => state);
+    const filteredHeroesList = useSelector(state => {
+        if (state.filterBy === 'all') {
+            return state.heroes;
+        } else {
+            return state.heroes.filter(item => item.element === state.filterBy)
+        }
+    })
+    const heroesLoadingStatus = useSelector(state => state.heroesLoadingStatus);
+
     const dispatch = useDispatch();
     const { request } = useHttp();
 
     useEffect(() => {
-        console.log(filterBy);
         dispatch(heroesFetching());
         request("http://localhost:3001/heroes")
             .then(data => dispatch(heroesFetched(data)))
