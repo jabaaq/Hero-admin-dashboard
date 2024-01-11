@@ -1,3 +1,10 @@
+export const fetchHeroes = (request) => (dispatch) => {
+    dispatch(heroesFetching);
+    request("http://localhost:3001/heroes")
+        .then(data => dispatch(heroesFetched(data)))
+        .catch(() => dispatch(heroesFetchingError()))
+}
+
 export const heroesFetching = () => {
     return {
         type: 'HEROES_FETCHING'
@@ -71,3 +78,14 @@ export const filterHeroList = (filerBy) => {
         payload: filerBy
     }
 }
+
+// export const filterHeroList = (filerBy) => (dispatch) => {
+//     setTimeout(() => {
+//         dispatch(
+//             {
+//                 type: 'FILTER_HERO_LIST',
+//                 payload: filerBy
+//             }
+//         )
+//     }, 1000)
+// }
