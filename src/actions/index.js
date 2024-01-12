@@ -1,3 +1,8 @@
+import { createAction } from "@reduxjs/toolkit";
+
+
+
+
 export const fetchHeroes = (request) => (dispatch) => {
     dispatch(heroesFetching());
     request("http://localhost:3001/heroes")
@@ -5,36 +10,41 @@ export const fetchHeroes = (request) => (dispatch) => {
         .catch(() => dispatch(heroesFetchingError()))
 }
 
-export const heroesFetching = () => {
-    return {
-        type: 'HEROES_FETCHING'
-    }
-}
+// export const heroesFetching = () => {
+//     return {
+//         type: 'HEROES_FETCHING'
+//     }
+// }
 
-export const heroesFetched = (heroes) => {
-    return {
-        type: 'HEROES_FETCHED',
-        payload: heroes
-    }
-}
+export const heroesFetching = createAction('HEROES_FETCHING')
 
-export const heroesFetchingError = () => {
-    return {
-        type: 'HEROES_FETCHING_ERROR'
-    }
-}
+// export const heroesFetched = (heroes) => {
+//     return {
+//         type: 'HEROES_FETCHED',
+//         payload: heroes
+//     }
+// }
+
+export const heroesFetched = createAction('HEROES_FETCHED')
+
+export const heroesFetchingError = createAction('HEROES_FETCHING_ERROR')
+// export const heroesFetchingError = () => {
+//     return {
+//         type: 'HEROES_FETCHING_ERROR'
+//     }
+// }
+export const heroDeleteFromDb = createAction('DB_DELETED_HERO')
+// export const heroDeleteFromDb = (id) => {
+//     return {
+//         type: 'DB_DELETED_HERO',
+//         payload: id
+//     }
+// }
 
 export const onDelete = (index) => {
     return {
         type: 'DELETED_HERO',
         payload: index
-    }
-}
-
-export const heroDeleteFromDb = (id) => {
-    return {
-        type: 'DB_DELETED_HERO',
-        payload: id
     }
 }
 
@@ -46,12 +56,15 @@ export const addHero = (hero) => {
     }
 
 }
-export const heroCreated = (hero) => {
-    return {
-        type: 'CREATED_HERO',
-        payload: hero
-    }
-}
+
+export const heroCreated = createAction('CREATED_HERO')
+
+// export const heroCreated = (hero) => {
+//     return {
+//         type: 'CREATED_HERO',
+//         payload: hero
+//     }
+// }
 
 export const fetchFilters = (request) => (dispatch) => {
     dispatch(filtersFetching())
@@ -85,14 +98,3 @@ export const filterHeroList = (filerBy) => {
         payload: filerBy
     }
 }
-
-// export const filterHeroList = (filerBy) => (dispatch) => {
-//     setTimeout(() => {
-//         dispatch(
-//             {
-//                 type: 'FILTER_HERO_LIST',
-//                 payload: filerBy
-//             }
-//         )
-//     }, 1000)
-// }
