@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { filtersFetched } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHttp } from '../../hooks/http.hook';
-import { heroCreated } from '../../actions';
+import { heroCreated } from '../../components/heroesList/heroesSlice';
 import { useEffect, useState } from 'react';
 
 
