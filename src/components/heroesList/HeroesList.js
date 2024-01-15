@@ -3,7 +3,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
-import { heroDeleteFromDb, fetchHeroes } from './heroesSlice';
+import { heroDeleteFromDb, fetchHeroes, selectAll } from './heroesSlice';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
@@ -12,7 +12,7 @@ const HeroesList = () => {
 
     const filteredHeroesSelector = createSelector(
         (state) => state.filters.filterBy,
-        (state) => state.heroes.heroes,
+        selectAll,
         (filter, heroes) => {
             if (filter === 'all') {
                 return heroes;
