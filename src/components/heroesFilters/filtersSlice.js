@@ -21,7 +21,7 @@ const { actions, reducer } = filtersSlice
 
 export default reducer
 export const {
-    filterHeroList,
+    filtersHeroList,
     filtersFetched,
     filtersFetching,
     filtersFetchingError
