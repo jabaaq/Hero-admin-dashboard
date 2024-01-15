@@ -4,7 +4,6 @@ import { useHttp } from "../../hooks/http.hook";
 const initialState = {
     heroes: [],
     heroesLoadingStatus: 'idle',
-
 }
 
 export const fetchHeroes = createAsyncThunk(
